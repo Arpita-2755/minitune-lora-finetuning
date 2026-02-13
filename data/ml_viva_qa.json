@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What is machine learning?",
+    "answer": "Machine learning is a subset of artificial intelligence that enables systems to learn patterns from data and make predictions without being explicitly programmed."
+  },
+  {
+    "question": "What is overfitting in machine learning?",
+    "answer": "Overfitting occurs when a model learns noise and details from the training data, resulting in poor generalization to unseen data."
+  },
+  {
+    "question": "What is underfitting?",
+    "answer": "Underfitting happens when a model is too simple to capture the underlying patterns in the data, leading to poor performance on both training and test data."
+  },
+  {
+    "question": "What is the difference between supervised and unsupervised learning?",
+    "answer": "Supervised learning uses labeled data to train models, while unsupervised learning finds hidden patterns in unlabeled data."
+  },
+  {
+    "question": "What is bias and variance?",
+    "answer": "Bias refers to error due to overly simplistic assumptions, while variance refers to error due to excessive sensitivity to training data."
+  },
+  {
+    "question": "What is regularization?",
+    "answer": "Regularization is a technique used to prevent overfitting by adding a penalty term to the loss function, discouraging overly complex models."
+  },
+  {
+    "question": "What is gradient descent?",
+    "answer": "Gradient descent is an optimization algorithm that minimizes a loss function by iteratively updating model parameters in the direction of the negative gradient."
+  },
+  {
+    "question": "What is a confusion matrix?",
+    "answer": "A confusion matrix is a table used to evaluate classification models by showing true positives, false positives, true negatives, and false negatives."
+  },
+  {
+    "question": "What is precision and recall?",
+    "answer": "Precision measures the correctness of positive predictions, while recall measures how well a model identifies all relevant positive instances."
+  },
+  {
+    "question": "What is cross-validation?",
+    "answer": "Cross-validation is a technique for evaluating model performance by splitting data into multiple training and validation sets."
+  }
+]
