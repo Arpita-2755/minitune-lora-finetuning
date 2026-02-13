@@ -5,34 +5,61 @@ import torch
 st.set_page_config(page_title="MiniTune", page_icon="🧪")
 
 st.title("🧪 MiniTune")
-st.subheader("LoRA Fine-Tuned ML Viva Model (Merged & Hosted)")
+st.subheader("Base vs LoRA Fine-Tuned Comparison")
 
-MODEL_PATH = "arpitamishra27/minitune-merged-model"
+BASE_MODEL = "google/flan-t5-small"
+FINETUNED_MODEL = "arpitamishra27/minitune-merged-model"
 
 @st.cache_resource
-def load_model():
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-    model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_PATH)
-    return tokenizer, model
+def load_models():
+    tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
 
-tokenizer, model = load_model()
+    base_model = AutoModelForSeq2SeqLM.from_pretrained(BASE_MODEL)
+    finetuned_model = AutoModelForSeq2SeqLM.from_pretrained(FINETUNED_MODEL)
 
-question = st.text_input("Enter an ML viva question")
+    return tokenizer, base_model, finetuned_model
 
-if question:
-    inputs = tokenizer(
-        f"Question: {question}\nAnswer:",
-        return_tensors="pt"
-    )
+tokenizer, base_model, finetuned_model = load_models()
+
+
+def generate_answer(model, question):
+    prompt = f"""
+You are an ML viva examiner assistant.
+Answer the following machine learning question clearly and concisely.
+
+Question: {question}
+Answer:
+"""
+
+    inputs = tokenizer(prompt, return_tensors="pt")
 
     with torch.no_grad():
         outputs = model.generate(
             **inputs,
-            max_new_tokens=100,
-            temperature=0.7
+            max_new_tokens=120,
+            min_new_tokens=30,
+            temperature=0.7,
+            do_sample=True,
+            top_p=0.9,
+            repetition_penalty=1.2
         )
 
-    answer = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-    st.markdown("### 🧠 Fine-Tuned Model Response")
-    st.write(answer)
+
+question = st.text_input("Enter an ML viva question")
+
+if question:
+    with st.spinner("Generating responses..."):
+        base_answer = generate_answer(base_model, question)
+        finetuned_answer = generate_answer(finetuned_model, question)
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown("### 🧠 Base Model")
+        st.write(base_answer)
+
+    with col2:
+        st.markdown("### 🧪 Fine-Tuned Model")
+        st.write(finetuned_answer)
