@@ -25,8 +25,7 @@ HF_API_TOKEN = st.secrets["HF_API_TOKEN"]
 # Model Config
 # ---------------------------
 MODEL_ID = "arpitamishra27/minitune-merged-model"
-API_URL = f"https://router.huggingface.co/hf-inference/models/{MODEL_ID}"
-
+API_URL = f"https://api-inference.huggingface.co/models/{MODEL_ID}"
 HEADERS = {
     "Authorization": f"Bearer {HF_API_TOKEN}",
     "Content-Type": "application/json"
