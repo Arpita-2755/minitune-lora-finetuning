@@ -1,81 +1,38 @@
 import streamlit as st
-import requests
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+import torch
 
-# ---------------------------
-# Page Config
-# ---------------------------
-st.set_page_config(
-    page_title="MiniTune",
-    page_icon="🧪"
-)
+st.set_page_config(page_title="MiniTune", page_icon="🧪")
 
 st.title("🧪 MiniTune")
-st.subheader("LoRA Fine-Tuned ML Viva Model (HF Hosted)")
+st.subheader("LoRA Fine-Tuned ML Viva Model (Merged & Hosted)")
 
-# ---------------------------
-# Secrets Check
-# ---------------------------
-if "HF_API_TOKEN" not in st.secrets:
-    st.error("HF_API_TOKEN not found in Streamlit Secrets.")
-    st.stop()
+MODEL_PATH = "arpitamishra27/minitune-merged-model"
 
-HF_API_TOKEN = st.secrets["HF_API_TOKEN"]
+@st.cache_resource
+def load_model():
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+    model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_PATH)
+    return tokenizer, model
 
-# ---------------------------
-# Model Config
-# ---------------------------
-MODEL_ID = "arpitamishra27/minitune-merged-model"
-API_URL = f"https://api-inference.huggingface.co/models/{MODEL_ID}"
-HEADERS = {
-    "Authorization": f"Bearer {HF_API_TOKEN}",
-    "Content-Type": "application/json"
-}
+tokenizer, model = load_model()
 
-
-# ---------------------------
-# Query Function
-# ---------------------------
-def query_model(question):
-    payload = {
-        "inputs": f"Question: {question}\nAnswer:",
-        "parameters": {
-            "max_new_tokens": 100,
-            "temperature": 0.7
-        }
-    }
-
-    try:
-        response = requests.post(
-            API_URL,
-            headers=HEADERS,
-            json=payload,
-            timeout=60
-        )
-    except Exception as e:
-        return f"Request failed: {str(e)}"
-
-    if response.status_code != 200:
-        return f"Error {response.status_code}: {response.text}"
-
-    try:
-        result = response.json()
-    except Exception:
-        return f"Invalid JSON response:\n{response.text}"
-
-    if isinstance(result, list):
-        return result[0].get("generated_text", result)
-
-    return result
-
-
-# ---------------------------
-# UI Input
-# ---------------------------
 question = st.text_input("Enter an ML viva question")
 
 if question:
-    with st.spinner("Generating response..."):
-        answer = query_model(question)
+    inputs = tokenizer(
+        f"Question: {question}\nAnswer:",
+        return_tensors="pt"
+    )
+
+    with torch.no_grad():
+        outputs = model.generate(
+            **inputs,
+            max_new_tokens=100,
+            temperature=0.7
+        )
+
+    answer = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
     st.markdown("### 🧠 Fine-Tuned Model Response")
     st.write(answer)
