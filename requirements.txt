@@ -1,3 +1,7 @@
 streamlit
 torch==2.10.0
 transformers==5.1.0
+datasets
+peft
+accelerate
+sentencepiece

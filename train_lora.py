@@ -6,91 +6,100 @@ from datasets import Dataset
 from transformers import (
     AutoTokenizer,
     AutoModelForSeq2SeqLM,
+    TrainingArguments,
     Trainer,
-    TrainingArguments
+    DataCollatorForSeq2Seq
 )
 from peft import LoraConfig, get_peft_model
 
+BASE_MODEL = "google/flan-t5-base"
+OUTPUT_DIR = "minitune-lora-model"
 
-MODEL_NAME = "google/flan-t5-small"  # CPU-friendly & instruction-tuned
+print("Loading tokenizer and base model...")
+tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
+model = AutoModelForSeq2SeqLM.from_pretrained(BASE_MODEL)
 
+print("Loading dataset...")
+with open("data/ml_viva_qa.json", "r", encoding="utf-8") as f:
+    data = json.load(f)
 
-def load_dataset(path="data/ml_viva_qa.json"):
-    with open(path, "r") as f:
-        data = json.load(f)
+dataset = Dataset.from_list(data)
 
-    inputs = [
-        f"Question: {item['question']}\nAnswer:"
-        for item in data
-    ]
-    targets = [item["answer"] for item in data]
+# 🔹 Instruction formatting
+def format_example(example):
+    prompt = (
+        "Answer the following machine learning viva question clearly and concisely.\n\n"
+        f"Question: {example['question']}\n"
+        "Answer:"
+    )
+    return {
+        "input_text": prompt,
+        "target_text": example["answer"]
+    }
 
-    return Dataset.from_dict({"input_text": inputs, "target_text": targets})
+dataset = dataset.map(format_example)
 
-
-def tokenize(batch, tokenizer):
+# 🔹 Tokenization
+def tokenize_function(example):
     model_inputs = tokenizer(
-        batch["input_text"],
+        example["input_text"],
+        max_length=256,
         padding="max_length",
-        truncation=True,
-        max_length=128
+        truncation=True
     )
 
     labels = tokenizer(
-        batch["target_text"],
+        example["target_text"],
+        max_length=128,
         padding="max_length",
-        truncation=True,
-        max_length=128
+        truncation=True
     )
 
     model_inputs["labels"] = labels["input_ids"]
     return model_inputs
 
+print("Tokenizing dataset...")
+dataset = dataset.map(tokenize_function, remove_columns=dataset.column_names)
 
-def main():
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-    model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
+# 🔹 LoRA config
+print("Applying LoRA...")
+lora_config = LoraConfig(
+    r=8,
+    lora_alpha=16,
+    target_modules=["q", "v"],
+    lora_dropout=0.1,
+    bias="none",
+    task_type="SEQ_2_SEQ_LM"
+)
 
-    # ---- LoRA configuration ----
-    lora_config = LoraConfig(
-        r=8,
-        lora_alpha=16,
-        target_modules=["q", "v"],
-        lora_dropout=0.1,
-        bias="none",
-        task_type="SEQ_2_SEQ_LM"
-    )
+model = get_peft_model(model, lora_config)
 
-    model = get_peft_model(model, lora_config)
-    model.print_trainable_parameters()
+# 🔹 Data collator (important fix)
+data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
 
-    dataset = load_dataset()
-    tokenized_ds = dataset.map(
-        lambda x: tokenize(x, tokenizer),
-        batched=True
-    )
+training_args = TrainingArguments(
+    output_dir=OUTPUT_DIR,
+    per_device_train_batch_size=4,
+    num_train_epochs=3,
+    learning_rate=5e-5,
+    logging_steps=10,
+    save_strategy="epoch",
+    fp16=torch.cuda.is_available(),
+    report_to="none"
+)
 
-    training_args = TrainingArguments(
-        output_dir="./minitune-output",
-        per_device_train_batch_size=2,
-        num_train_epochs=10,
-        learning_rate=2e-4,
-        logging_steps=1,
-        save_strategy="no",
-        report_to="none"
-    )
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=dataset,
+    data_collator=data_collator
+)
 
-    trainer = Trainer(
-        model=model,
-        args=training_args,
-        train_dataset=tokenized_ds
-    )
+print("Training...")
+trainer.train()
 
-    trainer.train()
+print("Saving LoRA model...")
+model.save_pretrained(OUTPUT_DIR)
+tokenizer.save_pretrained(OUTPUT_DIR)
 
-    model.save_pretrained("minitune-lora-model")
-    tokenizer.save_pretrained("minitune-lora-model")
-
-
-if __name__ == "__main__":
-    main()
+print("Training complete.")

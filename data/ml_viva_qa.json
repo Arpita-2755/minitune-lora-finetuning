@@ -1,42 +1,600 @@
 [
   {
     "question": "What is machine learning?",
-    "answer": "Machine learning is a subset of artificial intelligence that enables systems to learn patterns from data and make predictions without being explicitly programmed."
+    "answer": "Machine learning is a field of artificial intelligence that enables systems to learn patterns from data and make predictions or decisions without being explicitly programmed."
   },
   {
-    "question": "What is overfitting in machine learning?",
-    "answer": "Overfitting occurs when a model learns noise and details from the training data, resulting in poor generalization to unseen data."
+    "question": "What is supervised learning?",
+    "answer": "Supervised learning is a type of machine learning where models are trained using labeled data to predict outputs from input features."
+  },
+  {
+    "question": "What is unsupervised learning?",
+    "answer": "Unsupervised learning is a machine learning approach where models discover patterns and structure in unlabeled data."
+  },
+  {
+    "question": "What is reinforcement learning?",
+    "answer": "Reinforcement learning is a type of learning where an agent interacts with an environment and learns optimal actions through rewards and penalties."
+  },
+  {
+    "question": "What is overfitting?",
+    "answer": "Overfitting occurs when a model learns the training data too closely, including noise, which reduces its performance on unseen data."
   },
   {
     "question": "What is underfitting?",
-    "answer": "Underfitting happens when a model is too simple to capture the underlying patterns in the data, leading to poor performance on both training and test data."
+    "answer": "Underfitting happens when a model is too simple to capture underlying patterns, leading to poor performance on both training and test data."
   },
   {
-    "question": "What is the difference between supervised and unsupervised learning?",
-    "answer": "Supervised learning uses labeled data to train models, while unsupervised learning finds hidden patterns in unlabeled data."
+    "question": "What is bias in machine learning?",
+    "answer": "Bias refers to errors caused by overly simplistic assumptions in a model, which can prevent it from capturing complex patterns."
   },
   {
-    "question": "What is bias and variance?",
-    "answer": "Bias refers to error due to overly simplistic assumptions, while variance refers to error due to excessive sensitivity to training data."
+    "question": "What is variance in machine learning?",
+    "answer": "Variance refers to a model’s sensitivity to small changes in the training data, often leading to overfitting."
   },
   {
-    "question": "What is regularization?",
-    "answer": "Regularization is a technique used to prevent overfitting by adding a penalty term to the loss function, discouraging overly complex models."
+    "question": "What is the bias-variance tradeoff?",
+    "answer": "The bias-variance tradeoff describes the balance between underfitting and overfitting to achieve optimal model performance."
   },
   {
-    "question": "What is gradient descent?",
-    "answer": "Gradient descent is an optimization algorithm that minimizes a loss function by iteratively updating model parameters in the direction of the negative gradient."
+    "question": "What is cross-validation?",
+    "answer": "Cross-validation is a technique used to evaluate model performance by dividing data into multiple training and validation splits."
+  },
+  {
+    "question": "What is k-fold cross-validation?",
+    "answer": "K-fold cross-validation divides the dataset into k equal parts and trains the model k times, each time using a different fold for validation."
   },
   {
     "question": "What is a confusion matrix?",
     "answer": "A confusion matrix is a table used to evaluate classification models by showing true positives, false positives, true negatives, and false negatives."
   },
   {
-    "question": "What is precision and recall?",
-    "answer": "Precision measures the correctness of positive predictions, while recall measures how well a model identifies all relevant positive instances."
+    "question": "What is precision?",
+    "answer": "Precision measures the proportion of correctly predicted positive instances among all predicted positives."
   },
   {
-    "question": "What is cross-validation?",
-    "answer": "Cross-validation is a technique for evaluating model performance by splitting data into multiple training and validation sets."
+    "question": "What is recall?",
+    "answer": "Recall measures the proportion of actual positive instances that were correctly identified by the model."
+  },
+  {
+    "question": "What is F1-score?",
+    "answer": "F1-score is the harmonic mean of precision and recall and balances both metrics in a single value."
+  },
+  {
+    "question": "What is accuracy?",
+    "answer": "Accuracy is the proportion of correct predictions among the total number of predictions made."
+  },
+  {
+    "question": "What is a loss function?",
+    "answer": "A loss function measures the difference between predicted outputs and actual values during model training."
+  },
+  {
+    "question": "What is gradient descent?",
+    "answer": "Gradient descent is an optimization algorithm that minimizes a loss function by updating model parameters in the direction of the negative gradient."
+  },
+  {
+    "question": "What is stochastic gradient descent?",
+    "answer": "Stochastic gradient descent updates model parameters using one training example at a time, making training faster but noisier."
+  },
+  {
+    "question": "What is batch gradient descent?",
+    "answer": "Batch gradient descent updates model parameters using the entire training dataset in each iteration."
+  },
+  {
+    "question": "What is mini-batch gradient descent?",
+    "answer": "Mini-batch gradient descent updates parameters using small subsets of data, balancing efficiency and stability."
+  },
+  {
+    "question": "What is regularization?",
+    "answer": "Regularization is a technique used to prevent overfitting by adding a penalty term to the loss function."
+  },
+  {
+    "question": "What is L1 regularization?",
+    "answer": "L1 regularization adds the absolute value of weights as a penalty term, encouraging sparsity in the model."
+  },
+  {
+    "question": "What is L2 regularization?",
+    "answer": "L2 regularization adds the squared value of weights as a penalty term, discouraging large weight values."
+  },
+  {
+    "question": "What is dropout?",
+    "answer": "Dropout is a regularization technique that randomly deactivates neurons during training to prevent overfitting."
+  },
+  {
+    "question": "What is a training set?",
+    "answer": "A training set is the portion of data used to train a machine learning model."
+  },
+  {
+    "question": "What is a test set?",
+    "answer": "A test set is the portion of data used to evaluate a trained model’s performance on unseen data."
+  },
+  {
+    "question": "What is a validation set?",
+    "answer": "A validation set is used during training to tune hyperparameters and prevent overfitting."
+  },
+  {
+    "question": "What is a hyperparameter?",
+    "answer": "A hyperparameter is a configuration setting chosen before training that controls the learning process."
+  },
+  {
+    "question": "What is a feature?",
+    "answer": "A feature is an individual measurable property or characteristic used as input for a model."
+  },
+  {
+    "question": "What is feature engineering?",
+    "answer": "Feature engineering is the process of selecting, modifying, or creating input variables to improve model performance."
+  },
+  {
+    "question": "What is normalization?",
+    "answer": "Normalization scales data to a fixed range, usually between 0 and 1."
+  },
+  {
+    "question": "What is standardization?",
+    "answer": "Standardization transforms data to have a mean of zero and a standard deviation of one."
+  },
+  {
+    "question": "What is linear regression?",
+    "answer": "Linear regression is a supervised learning algorithm used to model the relationship between input variables and a continuous output."
+  },
+  {
+    "question": "What is logistic regression?",
+    "answer": "Logistic regression is a classification algorithm that predicts probabilities using the sigmoid function."
+  },
+  {
+    "question": "What is the sigmoid function?",
+    "answer": "The sigmoid function is an S-shaped function that maps real-valued inputs into probabilities between 0 and 1."
+  },
+  {
+    "question": "What is a decision tree?",
+    "answer": "A decision tree is a model that makes predictions by splitting data into branches based on feature values."
+  },
+  {
+    "question": "What is entropy in decision trees?",
+    "answer": "Entropy measures the impurity or disorder in a dataset and is used to determine optimal splits."
+  },
+  {
+    "question": "What is information gain?",
+    "answer": "Information gain measures the reduction in entropy achieved by splitting a dataset on a feature."
+  },
+  {
+    "question": "What is a random forest?",
+    "answer": "Random forest is an ensemble method that combines multiple decision trees to improve prediction accuracy."
+  },
+  {
+    "question": "What is ensemble learning?",
+    "answer": "Ensemble learning combines multiple models to achieve better performance than individual models."
+  },
+  {
+    "question": "What is boosting?",
+    "answer": "Boosting is an ensemble technique that trains models sequentially, focusing on correcting previous errors."
+  },
+  {
+    "question": "What is bagging?",
+    "answer": "Bagging is an ensemble method that trains multiple models in parallel on different subsets of data."
+  },
+  {
+    "question": "What is support vector machine?",
+    "answer": "Support Vector Machine is a supervised learning algorithm that finds an optimal hyperplane to separate classes."
+  },
+  {
+    "question": "What is a kernel in SVM?",
+    "answer": "A kernel is a function that transforms data into higher-dimensional space to make it linearly separable."
+  },
+  {
+    "question": "What is k-nearest neighbors?",
+    "answer": "K-nearest neighbors is a classification algorithm that assigns labels based on the majority class among nearest data points."
+  },
+  {
+    "question": "What is clustering?",
+    "answer": "Clustering is an unsupervised learning technique that groups similar data points together."
+  },
+  {
+    "question": "What is k-means clustering?",
+    "answer": "K-means clustering partitions data into k groups by minimizing the distance between data points and cluster centroids."
+  },
+  {
+    "question": "What is hierarchical clustering?",
+    "answer": "Hierarchical clustering builds nested clusters by either merging or splitting groups of data points."
+  },
+  {
+    "question": "What is dimensionality reduction?",
+    "answer": "Dimensionality reduction is the process of reducing the number of input features while preserving important information in the data."
+  },
+  {
+    "question": "What is Principal Component Analysis?",
+    "answer": "Principal Component Analysis is a dimensionality reduction technique that transforms data into orthogonal components capturing maximum variance."
+  },
+  {
+    "question": "What is Singular Value Decomposition?",
+    "answer": "Singular Value Decomposition is a matrix factorization technique used for dimensionality reduction and data compression."
+  },
+  {
+    "question": "What is feature selection?",
+    "answer": "Feature selection is the process of choosing the most relevant features to improve model performance and reduce complexity."
+  },
+  {
+    "question": "What is anomaly detection?",
+    "answer": "Anomaly detection identifies rare or unusual data points that significantly differ from the majority of the data."
+  },
+  {
+    "question": "What is time series forecasting?",
+    "answer": "Time series forecasting predicts future values based on previously observed time-ordered data."
+  },
+  {
+    "question": "What is natural language processing?",
+    "answer": "Natural language processing is a field of artificial intelligence that enables machines to understand and process human language."
+  },
+  {
+    "question": "What is tokenization in NLP?",
+    "answer": "Tokenization is the process of breaking text into smaller units such as words or subwords for analysis."
+  },
+  {
+    "question": "What is stemming?",
+    "answer": "Stemming reduces words to their root form by removing suffixes."
+  },
+  {
+    "question": "What is lemmatization?",
+    "answer": "Lemmatization converts words to their base or dictionary form while preserving meaning."
+  },
+  {
+    "question": "What is a neural network?",
+    "answer": "A neural network is a machine learning model inspired by the human brain that consists of interconnected layers of neurons."
+  },
+  {
+    "question": "What is a perceptron?",
+    "answer": "A perceptron is a single-layer neural network used for binary classification tasks."
+  },
+  {
+    "question": "What is backpropagation?",
+    "answer": "Backpropagation is an algorithm used to update neural network weights by propagating errors backward through the network."
+  },
+  {
+    "question": "What is an activation function?",
+    "answer": "An activation function introduces non-linearity into neural networks, enabling them to learn complex patterns."
+  },
+  {
+    "question": "What is ReLU?",
+    "answer": "ReLU, or Rectified Linear Unit, is an activation function that outputs zero for negative inputs and the input itself for positive values."
+  },
+  {
+    "question": "What is softmax?",
+    "answer": "Softmax is an activation function that converts raw model outputs into probability distributions over multiple classes."
+  },
+  {
+    "question": "What is deep learning?",
+    "answer": "Deep learning is a subset of machine learning that uses multi-layer neural networks to learn hierarchical representations."
+  },
+  {
+    "question": "What is a convolutional neural network?",
+    "answer": "A convolutional neural network is a deep learning model designed primarily for image and spatial data processing."
+  },
+  {
+    "question": "What is a recurrent neural network?",
+    "answer": "A recurrent neural network is a neural network designed to handle sequential data by maintaining memory of previous inputs."
+  },
+  {
+    "question": "What is an LSTM?",
+    "answer": "Long Short-Term Memory is a type of recurrent neural network that can learn long-term dependencies in sequential data."
+  },
+  {
+    "question": "What is transfer learning?",
+    "answer": "Transfer learning involves using a pre-trained model on a new task to reduce training time and improve performance."
+  },
+  {
+    "question": "What is fine-tuning?",
+    "answer": "Fine-tuning is the process of slightly adjusting a pre-trained model on a specific dataset to improve task-specific performance."
+  },
+  {
+    "question": "What is LoRA in machine learning?",
+    "answer": "LoRA, or Low-Rank Adaptation, is a parameter-efficient fine-tuning method that updates only small low-rank matrices instead of the full model."
+  },
+  {
+    "question": "What is prompt engineering?",
+    "answer": "Prompt engineering is the practice of designing input prompts to guide large language models toward desired outputs."
+  },
+  {
+    "question": "What is generative AI?",
+    "answer": "Generative AI refers to models that can generate new data such as text, images, or audio based on learned patterns."
+  },
+  {
+    "question": "What is a large language model?",
+    "answer": "A large language model is a deep neural network trained on vast amounts of text data to understand and generate human language."
+  },
+  {
+    "question": "What is attention mechanism?",
+    "answer": "The attention mechanism allows models to focus on relevant parts of input data when making predictions."
+  },
+  {
+    "question": "What is a transformer model?",
+    "answer": "A transformer is a neural network architecture based on attention mechanisms used for sequence modeling tasks."
+  },
+  {
+    "question": "What is self-attention?",
+    "answer": "Self-attention allows a model to weigh the importance of different words in a sequence relative to each other."
+  },
+  {
+    "question": "What is an embedding?",
+    "answer": "An embedding is a dense numerical representation of data such as words or images in vector space."
+  },
+  {
+    "question": "What is cosine similarity?",
+    "answer": "Cosine similarity measures the similarity between two vectors based on the angle between them."
+  },
+  {
+    "question": "What is a recommendation system?",
+    "answer": "A recommendation system suggests items to users based on preferences, behavior, or similarity patterns."
+  },
+  {
+    "question": "What is collaborative filtering?",
+    "answer": "Collaborative filtering makes recommendations based on user interactions and similarities between users or items."
+  },
+  {
+    "question": "What is content-based filtering?",
+    "answer": "Content-based filtering recommends items based on features similar to those the user previously liked."
+  },
+  {
+    "question": "What is model evaluation?",
+    "answer": "Model evaluation assesses how well a trained model performs on unseen data."
+  },
+  {
+    "question": "What is ROC curve?",
+    "answer": "The ROC curve plots true positive rate against false positive rate to evaluate classification performance."
+  },
+  {
+    "question": "What is AUC?",
+    "answer": "AUC is the area under the ROC curve and measures a classifier’s ability to distinguish between classes."
+  },
+  {
+    "question": "What is early stopping?",
+    "answer": "Early stopping is a regularization technique that halts training when validation performance stops improving."
+  },
+  {
+    "question": "What is model generalization?",
+    "answer": "Model generalization refers to a model’s ability to perform well on unseen data."
+  },
+  {
+    "question": "What is data augmentation?",
+    "answer": "Data augmentation increases dataset size by applying transformations to existing data samples."
+  },
+  {
+    "question": "What is class imbalance?",
+    "answer": "Class imbalance occurs when some classes have significantly more samples than others."
+  },
+  {
+    "question": "What is SMOTE?",
+    "answer": "SMOTE is a technique that generates synthetic minority samples to balance imbalanced datasets."
+  },
+  {
+    "question": "What is hyperparameter tuning?",
+    "answer": "Hyperparameter tuning is the process of selecting optimal hyperparameter values to improve model performance."
+  },
+  {
+    "question": "What is grid search?",
+    "answer": "Grid search systematically tests combinations of hyperparameters to find the best configuration."
+  },
+  {
+    "question": "What is random search?",
+    "answer": "Random search samples random combinations of hyperparameters to efficiently explore the search space."
+  },
+  {
+    "question": "What is Bayesian optimization?",
+    "answer": "Bayesian optimization uses probabilistic models to efficiently find optimal hyperparameters."
+  },
+  {
+    "question": "What is explainable AI?",
+    "answer": "Explainable AI focuses on making machine learning models understandable and interpretable to humans."
+  },
+  {
+    "question": "What is SHAP?",
+    "answer": "SHAP is a method that explains model predictions by calculating the contribution of each feature."
+  },
+  {
+    "question": "What is LIME?",
+    "answer": "LIME is a technique that explains individual model predictions using locally approximated interpretable models."
+  },
+  {
+    "question": "What is model deployment?",
+    "answer": "Model deployment is the process of integrating a trained machine learning model into a production environment."
+  },
+  {
+    "question": "What is model drift?",
+    "answer": "Model drift occurs when a deployed model's performance degrades over time due to changes in data distribution."
+  },
+  {
+    "question": "What is concept drift?",
+    "answer": "Concept drift refers to changes in the relationship between input data and target variables over time."
+  },
+  {
+    "question": "What is data leakage?",
+    "answer": "Data leakage occurs when information from outside the training dataset is used during training, leading to overly optimistic performance."
+  },
+  {
+    "question": "What is a pipeline in machine learning?",
+    "answer": "A pipeline is a sequence of data processing and modeling steps organized to ensure consistent and reproducible workflows."
+  },
+  {
+    "question": "What is feature scaling?",
+    "answer": "Feature scaling is the process of adjusting numerical features to a similar scale to improve model performance."
+  },
+  {
+    "question": "What is one-hot encoding?",
+    "answer": "One-hot encoding converts categorical variables into binary vectors for use in machine learning models."
+  },
+  {
+    "question": "What is label encoding?",
+    "answer": "Label encoding assigns numerical values to categorical variables for model processing."
+  },
+  {
+    "question": "What is a confusion matrix used for?",
+    "answer": "A confusion matrix is used to evaluate classification models by comparing predicted and actual class labels."
+  },
+  {
+    "question": "What is precision-recall tradeoff?",
+    "answer": "The precision-recall tradeoff describes how increasing precision often reduces recall and vice versa."
+  },
+  {
+    "question": "What is multi-class classification?",
+    "answer": "Multi-class classification is a task where the model predicts one label among more than two possible classes."
+  },
+  {
+    "question": "What is multi-label classification?",
+    "answer": "Multi-label classification assigns multiple labels to a single instance."
+  },
+  {
+    "question": "What is regression?",
+    "answer": "Regression is a supervised learning task that predicts continuous numerical outputs."
+  },
+  {
+    "question": "What is mean squared error?",
+    "answer": "Mean squared error measures the average squared difference between predicted and actual values."
+  },
+  {
+    "question": "What is mean absolute error?",
+    "answer": "Mean absolute error measures the average absolute difference between predicted and actual values."
+  },
+  {
+    "question": "What is R-squared?",
+    "answer": "R-squared measures the proportion of variance in the target variable explained by the model."
+  },
+  {
+    "question": "What is a learning rate?",
+    "answer": "The learning rate controls the step size during parameter updates in training."
+  },
+  {
+    "question": "What is model convergence?",
+    "answer": "Model convergence occurs when training stabilizes and loss stops decreasing significantly."
+  },
+  {
+    "question": "What is over-parameterization?",
+    "answer": "Over-parameterization occurs when a model has more parameters than necessary to represent the data."
+  },
+  {
+    "question": "What is gradient clipping?",
+    "answer": "Gradient clipping limits gradient values to prevent exploding gradients during training."
+  },
+  {
+    "question": "What is vanishing gradient problem?",
+    "answer": "The vanishing gradient problem occurs when gradients become extremely small, slowing or stopping learning in deep networks."
+  },
+  {
+    "question": "What is exploding gradient problem?",
+    "answer": "The exploding gradient problem occurs when gradients grow excessively large during training."
+  },
+  {
+    "question": "What is batch normalization?",
+    "answer": "Batch normalization stabilizes training by normalizing layer inputs within mini-batches."
+  },
+  {
+    "question": "What is transfer learning in NLP?",
+    "answer": "Transfer learning in NLP involves adapting a pre-trained language model to a new language task."
+  },
+  {
+    "question": "What is masked language modeling?",
+    "answer": "Masked language modeling trains models to predict missing words in a sentence."
+  },
+  {
+    "question": "What is causal language modeling?",
+    "answer": "Causal language modeling predicts the next token in a sequence based on previous tokens."
+  },
+  {
+    "question": "What is sequence-to-sequence modeling?",
+    "answer": "Sequence-to-sequence modeling maps an input sequence to an output sequence using encoder-decoder architectures."
+  },
+  {
+    "question": "What is fine-tuning versus full training?",
+    "answer": "Fine-tuning adjusts a pre-trained model on new data, while full training trains a model from scratch."
+  },
+  {
+    "question": "What is LoRA fine-tuning?",
+    "answer": "LoRA fine-tuning updates only low-rank adapter matrices while keeping base model weights frozen."
+  },
+  {
+    "question": "What is quantization in machine learning?",
+    "answer": "Quantization reduces model size by representing weights with lower numerical precision."
+  },
+  {
+    "question": "What is model pruning?",
+    "answer": "Model pruning removes less important parameters to reduce model size and computation."
+  },
+  {
+    "question": "What is inference in machine learning?",
+    "answer": "Inference is the process of using a trained model to make predictions on new data."
+  },
+  {
+    "question": "What is a generative model?",
+    "answer": "A generative model learns data distribution and can generate new data samples."
+  },
+  {
+    "question": "What is a discriminative model?",
+    "answer": "A discriminative model learns decision boundaries to classify or predict outputs."
+  },
+  {
+    "question": "What is zero-shot learning?",
+    "answer": "Zero-shot learning enables models to make predictions on tasks they were not explicitly trained on."
+  },
+  {
+    "question": "What is few-shot learning?",
+    "answer": "Few-shot learning allows models to learn new tasks from a small number of examples."
+  },
+  {
+    "question": "What is data preprocessing?",
+    "answer": "Data preprocessing involves cleaning and transforming raw data before training a model."
+  },
+  {
+    "question": "What is outlier detection?",
+    "answer": "Outlier detection identifies data points that significantly deviate from the majority."
+  },
+  {
+    "question": "What is a confusion matrix diagonal?",
+    "answer": "The diagonal of a confusion matrix represents correctly classified instances."
+  },
+  {
+    "question": "What is cost-sensitive learning?",
+    "answer": "Cost-sensitive learning considers different misclassification costs during training."
+  },
+  {
+    "question": "What is reinforcement learning policy?",
+    "answer": "A policy defines the strategy an agent follows to choose actions in reinforcement learning."
+  },
+  {
+    "question": "What is reward function?",
+    "answer": "A reward function assigns feedback to an agent based on its actions in reinforcement learning."
+  },
+  {
+    "question": "What is Q-learning?",
+    "answer": "Q-learning is a reinforcement learning algorithm that learns action-value functions."
+  },
+  {
+    "question": "What is model interpretability?",
+    "answer": "Model interpretability refers to how easily humans can understand a model’s decisions."
+  },
+  {
+    "question": "What is fairness in AI?",
+    "answer": "Fairness in AI ensures models do not produce biased or discriminatory outcomes."
+  },
+  {
+    "question": "What is data annotation?",
+    "answer": "Data annotation involves labeling data to make it usable for supervised learning."
+  },
+  {
+    "question": "What is semi-supervised learning?",
+    "answer": "Semi-supervised learning uses both labeled and unlabeled data for training."
+  },
+  {
+    "question": "What is active learning?",
+    "answer": "Active learning allows a model to query the most informative data points for labeling."
+  },
+  {
+    "question": "What is a transformer encoder?",
+    "answer": "A transformer encoder processes input sequences using self-attention mechanisms."
+  },
+  {
+    "question": "What is a transformer decoder?",
+    "answer": "A transformer decoder generates output sequences using attention over encoded inputs."
+  },
+  {
+    "question": "What is attention score?",
+    "answer": "An attention score measures the relevance between different elements in a sequence."
   }
 ]
+
+
